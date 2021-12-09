@@ -16,6 +16,20 @@ class CategorieManager extends AbstractManager
         );
     }
 
+    public function findAllTopicsByCategorie($id)
+    {
+        return $this::getResults(
+            "App\\Entity\\Categorie",
+            "SELECT titre, s.id AS suj, c.id AS id FROM sujet s
+            INNER JOIN categorie c ON c.id = s.categorie_id
+            Where id = :id",
+            [
+                ":id" => $id
+            ]
+        ); 
+    }
+
+
     public function findOneById($id)
     {
         return $this::getOneOrNullResult(

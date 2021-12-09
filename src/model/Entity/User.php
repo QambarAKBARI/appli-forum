@@ -43,22 +43,7 @@ class User extends AbstractEntity
 
 
 
-    /**
-     * Get the value of prenom
-     */ 
-    public function getPrenom()
-    {
-        return $this->prenom;
-    }
 
-
-    /**
-     * Get the value of nom
-     */ 
-    public function getNom()
-    {
-        return $this->nom;
-    }
 
 
     /**
@@ -85,5 +70,10 @@ class User extends AbstractEntity
     public function getRole()
     {
         return $this->role;
+    }
+
+    public function __toString()
+    {
+        return $this->pseudo;
     }
 }

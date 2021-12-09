@@ -15,4 +15,13 @@ class CategorieController extends AbstractController {
                 "categories" => $categories
             ]);
         }
+        public function Categories(){
+            $cmanager = new CategorieManager;
+            $categories = $cmanager->findAll();
+
+            return $this->render("forum/categorie.php", [
+                "categories" => $categories
+            ]);
+        }
+
     }

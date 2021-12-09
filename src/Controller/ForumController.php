@@ -2,13 +2,15 @@
 namespace App\Controller;
 
 use App\Manager\ForumManager;
+use App\Manager\CategorieManager;
+use App\Manager\MessageManager;
 
 class ForumController extends AbstractController
 {
     //?ctrl=store&action=index
-    public function index()
+    public function index($id)
     {
-        $cmanager = new ForumManager;
+        $cmanager = new CategorieManager;
         $categories = $cmanager->findAll();
 
         return $this->render("forum/home.php", [
@@ -16,17 +18,14 @@ class ForumController extends AbstractController
         ]);
     }
 
-    //?ctrl=store&action=product&id=XX
-    public function product($id)
-    {
-        $manager = new ForumManager();
-        $product = $manager->findOneById($id);
+    public function message($id){
+        $mmanager = new MessageManager;
+        $messages = $mmanager->findAllMessagesByTopic($id);
 
-        if(!$product) return false;
-
-        return $this->render("store/product.php", [
-            "product" => $product
+        return $this->render("forum/message.php", [
+            "messages" => $messages
         ]);
     }
+
 
 }
