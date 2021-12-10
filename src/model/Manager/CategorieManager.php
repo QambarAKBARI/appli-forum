@@ -30,6 +30,16 @@ class CategorieManager extends AbstractManager
     }
 
 
+
+    public function insertThaCategory($categorie){
+        return $this->executeQuery(
+            "INSERT INTO categorie (nom_categorie) VALUES (:c)",
+            [
+                ":c" => $categorie,
+            ]
+        );
+    }
+
     public function findOneById($id)
     {
         return $this::getOneOrNullResult(

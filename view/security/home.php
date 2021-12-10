@@ -2,17 +2,21 @@
 
 $categories = $response["data"]["categories"];
 
-echo "Bienvenue dans votre forum !!<br>",
-        "Veuillez vous inscrire pour pouvoir consulter notre forum !!";
+
 
         ?>
-        <h1>Nos Categories :</h1>
-        <ul>
-        <?php
-        foreach($categories as $categorie){
-            ?>
-            <li><?= $categorie ?></li>
+        <div class="sujet-item">
+            <h1>Bienvenue dans votre forum !!</h1>
+            <h2>Veuillez vous inscrire pour pouvoir consulter notre forum  </h2>
+        
+            <h3>Nos Categories :</h1>
+            
             <?php
-        }
-        ?>
-        </ul>
+            foreach($categories as $categorie){
+                ?>
+                <p><strong><?= $categorie ?></strong></p>
+                <?php
+            }
+            ?>
+            <a href="?ctrl=security&action=register">Découvrir</a>
+        </div>

@@ -39,17 +39,46 @@ class SujetController extends AbstractController {
                 $sujet = Form::getData("sujet", "text");
                 if($sujet){
                     $manager = new SujetManager;
-                    if($newId = $manager->insertTheTopic($sujet, $userId, $id)){
+                    if($manager->insertTheTopic($sujet, $userId, $id)){
                         $this->addFlash("success", "Votre sujet a bien été ajouté !!");
                         $this->redirect("?ctrl=sujet&action=sujet&id=$id");
                     }else $this->addFlash("error", "Problème de connexion de BDD !!!"); 
                 }else $this->addFlash("notice", "Veuillez écrire votre sujet !!");
 
-            }else $this->addFlash("notice", "Veuillez Valider votre sujet !!");
-            
+            }else{ 
+                $this->addFlash("notice", "Veuillez Valider votre sujet !!");
+                return $this->render("forum/sujet.php");
+            }
+        
+            return $this->render("forum/sujet.php");
 
+        }
 
-            return $this->render("forum/message.php");
+        public function verrouiller($id){
 
+            $manager = new SujetManager;
+
+            if($manager->updateTopic($id)){
+                $this->addFlash("success", "Votre sujet est bien verrouillé maintenant !!!");
+                $this->redirect("?ctrl=sujet&action=sujet&id=$id");
+            }else{
+                $this->addFlash("error", "Erreur BDD !!!");
+                $this->redirect("?ctrl=sujet&action=sujet");
+            }
+            return $this->render("forum/sujet.php");
+        }
+
+        public function ouvrir($id){
+
+            $manager = new SujetManager;
+
+            if($manager->updateTopicToNo($id)){
+                $this->addFlash("success", "Votre sujet est bien ouvert maintenant !!!");
+                $this->redirect("?ctrl=sujet&action=sujet&id=$id");
+            }else{
+                $this->addFlash("error", "Erreur BDD !!!");
+                $this->redirect("?ctrl=sujet&action=sujet");
+            }
+            return $this->render("forum/sujet.php");
         }
     }

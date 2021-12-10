@@ -36,11 +36,10 @@ use App\Service\Session;
                         <?php
                     }
                     ?>
-                    <span><?= $user->getPseudo() ?></span>
+                    
                     <a href="?ctrl=forum&action=index">Acceuil</a>
-                    <a href="?ctrl=message&action=messages">Messages</a>
+                    <span><?= $user->getPseudo() ?></span>
                     <a href="?ctrl=categorie&action=categories">Categories</a>
-                    <a href="?ctrl=sujet&action=sujets">Sujets</a>
                     <a href="?ctrl=security&action=logout">Déconnexion</a>
                     <?php
                 }

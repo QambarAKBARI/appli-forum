@@ -52,4 +52,30 @@ class SujetManager extends AbstractManager {
             ]
         );
     }
+
+    public function updateTopic($id){
+
+        return $this::executeQuery(
+            "UPDATE sujet 
+            SET verouillage = :y
+            WHERE id = :id",
+            [
+                ":id" => $id,
+                ":y" => "yes",
+            ]
+        );
+    }
+
+    public function updateTopicToNo($id){
+
+        return $this::executeQuery(
+            "UPDATE sujet 
+            SET verouillage = :y
+            WHERE id = :id",
+            [
+                ":id" => $id,
+                ":y" => "non",
+            ]
+        );
+    }
 }

@@ -6,7 +6,10 @@ body{
     margin: 0;
     min-height: 100vh;
 }
-
+a{
+    text-decoration: none;
+    color: lightcoral;
+}
 .centered{
     text-align: center;
 }
@@ -52,4 +55,11 @@ form{
     border: 1px solid black;
     padding: 1em;
     text-align: center;
+}
+
+form.fermee{
+    display: none;
+}
+form.ouvert{
+    display: initial;
 }

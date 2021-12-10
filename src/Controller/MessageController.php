@@ -37,8 +37,6 @@ class MessageController extends AbstractController {
 
             }else $this->addFlash("notice", "Veuillez Valider votre message !!");
             
-
-
             return $this->render("forum/message.php");
 
         }
