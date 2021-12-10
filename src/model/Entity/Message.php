@@ -23,7 +23,7 @@ class Message extends AbstractEntity{
      */ 
     public function getUser()
     {
-        return $this->user;
+        return ucfirst($this->user);
     }
 
     /**

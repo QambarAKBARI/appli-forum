@@ -46,3 +46,10 @@ form{
     background-color: rgb(134, 211, 255);
     color: rgb(23, 22, 78);
 }
+.sujet-item{
+    max-width: 500px;
+    margin: auto;
+    border: 1px solid black;
+    padding: 1em;
+    text-align: center;
+}

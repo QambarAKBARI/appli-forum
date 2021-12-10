@@ -4,21 +4,17 @@
 $categories = $response["data"]["categories"];
 
 echo "Bienvenue dans votre forum !!<br>";
-    //    var_dump($sujets);
 ?>
 <h1>Nos categorie :</h1>
-<table>
+<div class="sujet-item">
 
     <?php
     foreach($categories as $categorie){
-        // var_dump($sujet);
         ?>
-        <tr>
-            <th>
+            <h1>
             <a href="?ctrl=sujet&action=sujet&id=<?= $categorie->getId() ?>"><?= $categorie->getNom_categorie() ?>
-            </th>
-        </tr>
+            </h1>
         <?php
     }
     ?>
-</table>
+</div>

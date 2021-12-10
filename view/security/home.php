@@ -11,7 +11,7 @@ echo "Bienvenue dans votre forum !!<br>",
         <?php
         foreach($categories as $categorie){
             ?>
-            <li><?= $categorie->getTitre() ?></li>
+            <li><?= $categorie ?></li>
             <?php
         }
         ?>

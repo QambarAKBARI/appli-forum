@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Sujet;
 use App\Manager\SujetManager;
+use App\Manager\MessageManager;
 use App\Service\Session;
 use App\Service\Form;
 
@@ -33,12 +34,13 @@ class SujetController extends AbstractController {
         public function addSujet($id){
             $userId = Session::get("user")->getId();
             
+            
             if(Form::isSubmitted()){
                 $sujet = Form::getData("sujet", "text");
                 if($sujet){
                     $manager = new SujetManager;
                     if($newId = $manager->insertTheTopic($sujet, $userId, $id)){
-                        $this->addFlash("success", "Votre sujet a bien été sauvegardé !!");
+                        $this->addFlash("success", "Votre sujet a bien été ajouté !!");
                         $this->redirect("?ctrl=sujet&action=sujet&id=$id");
                     }else $this->addFlash("error", "Problème de connexion de BDD !!!"); 
                 }else $this->addFlash("notice", "Veuillez écrire votre sujet !!");
