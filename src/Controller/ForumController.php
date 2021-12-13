@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Manager\ForumManager;
 use App\Manager\CategorieManager;
 use App\Manager\MessageManager;
+use App\Manager\UserManager;
 
 class ForumController extends AbstractController
 {
@@ -24,6 +25,15 @@ class ForumController extends AbstractController
 
         return $this->render("forum/message.php", [
             "messages" => $messages
+        ]);
+    }
+
+    public function users(){
+        $umanager = new UserManager;
+        $users = $umanager->findAll();
+
+        return $this->render("forum/user.php", [
+            "users" => $users
         ]);
     }
 

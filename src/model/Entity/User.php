@@ -11,6 +11,7 @@ class User extends AbstractEntity
     private $pass;
     private $date_inscription;
     private $role;
+    private $status;
 
 
 
@@ -75,5 +76,13 @@ class User extends AbstractEntity
     public function __toString()
     {
         return $this->pseudo;
+    }
+
+    /**
+     * Get the value of status
+     */ 
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

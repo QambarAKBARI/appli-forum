@@ -60,12 +60,11 @@ class SujetController extends AbstractController {
 
             if($manager->updateTopic($id)){
                 $this->addFlash("success", "Votre sujet est bien verrouillé maintenant !!!");
-                $this->redirect("?ctrl=sujet&action=sujet&id=$id");
+                $this->redirect("?ctrl=forum&action=index");
             }else{
                 $this->addFlash("error", "Erreur BDD !!!");
-                $this->redirect("?ctrl=sujet&action=sujet");
+                $this->redirect("?ctrl=forum&action=index");
             }
-            return $this->render("forum/sujet.php");
         }
 
         public function ouvrir($id){
@@ -74,11 +73,10 @@ class SujetController extends AbstractController {
 
             if($manager->updateTopicToNo($id)){
                 $this->addFlash("success", "Votre sujet est bien ouvert maintenant !!!");
-                $this->redirect("?ctrl=sujet&action=sujet&id=$id");
+                $this->redirect("?ctrl=forum&action=index");
             }else{
                 $this->addFlash("error", "Erreur BDD !!!");
-                $this->redirect("?ctrl=sujet&action=sujet");
+                $this->redirect("?ctrl=forum&action=index");
             }
-            return $this->render("forum/sujet.php");
         }
     }

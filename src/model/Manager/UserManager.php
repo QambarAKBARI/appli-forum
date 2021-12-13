@@ -50,4 +50,44 @@ class UserManager extends AbstractManager
             ]
         );
     }
+
+
+    public function addAdmin($id){
+
+        return $this::executeQuery(
+            "UPDATE user 
+            SET role = :y
+            WHERE id = :id",
+            [
+                ":id" => $id,
+                ":y" => "ROLE_ADMIN",
+            ]
+        );
+    }
+
+    public function banUser($id){
+
+        return $this::executeQuery(
+            "UPDATE user 
+            SET status = :u
+            WHERE id = :id",
+            [
+                ":id" => $id,
+                ":u" => "ban",
+            ]
+        );
+    }
+
+    public function banAdmin($id){
+
+        return $this::executeQuery(
+            "UPDATE user 
+            SET role = :r
+            WHERE id = :id",
+            [
+                ":id" => $id,
+                ":r" => "",
+            ]
+        );
+    }
 }

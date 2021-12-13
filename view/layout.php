@@ -40,6 +40,7 @@ use App\Service\Session;
                     <a href="?ctrl=forum&action=index">Acceuil</a>
                     <span><?= $user->getPseudo() ?></span>
                     <a href="?ctrl=categorie&action=categories">Categories</a>
+                    <a href="?ctrl=forum&action=users">Utilisateurs</a>
                     <a href="?ctrl=security&action=logout">Déconnexion</a>
                     <?php
                 }

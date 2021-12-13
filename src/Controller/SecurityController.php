@@ -20,7 +20,6 @@ class SecurityController extends AbstractController
     }
 
 
-    //?ctrl=security&action=login
     public function login()
     {
         if(Form::isSubmitted()){
@@ -31,11 +30,14 @@ class SecurityController extends AbstractController
                 $manager = new UserManager();
                 if(($user = $manager->findByUsernameOrEmail($credentials, $credentials))
                     && password_verify($password, $user->getPass())){
-
-                    Session::set("user", $user);
-                    
-                    $this->addFlash("success", "Bienvenue ".$user->getPseudo());
-                    return $this->redirect("?ctrl=forum&action=index");
+                    if($user->getStatus() !== "ban"){
+                        Session::set("user", $user);
+                        $this->addFlash("success", "Bienvenue ".$user->getPseudo());
+                        return $this->redirect("?ctrl=forum&action=index");
+                    }else{
+                        $this->addFlash("error", "Vous êtes banni de forum !!");
+                        return $this->redirect("?ctrl=security&action=register");
+                    }
                 }
                 else $this->addFlash("error", "Mauvais identifiants ou mot de passe, réessayez !");
             }
@@ -44,17 +46,15 @@ class SecurityController extends AbstractController
         return $this->render("security/login.php");
     }
 
-    //?ctrl=security&action=logout
     public function logout()
     {
-        if(!$this->isGranted("ROLE_USER") && !$this->isGranted("ROLE_ADMIN")) return false;
+        if(!$this->isGranted("ROLE_USER") && !$this->isGranted("ROLE_ADMIN") && !$this->isGranted("SUPER_ADMIN")) return false;
         
         Session::remove("user");
         $this->addFlash("success", "A bientôt !");
         return $this->redirect("?ctrl=security&action=login");
     }
 
-    //?ctrl=security&action=register
     public function register()
     {
         if(Form::isSubmitted()){

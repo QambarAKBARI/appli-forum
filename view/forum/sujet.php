@@ -27,7 +27,6 @@ foreach($sujet as $suj){
     <h2><a href="?ctrl=message&action=message&id=<?= $suj->getId() ?>"><?= $suj->getTitre() ?></a></h2>
     <p><?= $suj->getDate_creation() ?></p>
     <p>Créé par : <?= $suj->getUser() ?></p>
-    <p>Créé par : <?= $suj->getUser() ?></p>
     <a href="?ctrl=sujet&action=<?= $action ?>&id=<?= $suj->getId() ?>"><?= $action ?></a>
     <?php
 

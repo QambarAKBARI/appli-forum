@@ -7,6 +7,7 @@ use App\Service\Session;
 use App\Manager\CategorieManager;
 use App\Manager\SujetManager;
 use App\Manager\MessageManager;
+use App\Manager\UserManager;
 
 class AdminController extends AbstractController
 {
@@ -40,6 +41,59 @@ class AdminController extends AbstractController
         return $this->render("admin/index.php");
 
     }
+
+
+    public function addAdmin($id){
+
+        $manager = new UserManager;
+
+        if($manager->addAdmin($id)){
+            $this->addFlash("success", "Cet utilisateur est devenu Admin maintenant !!!");
+            $this->redirect("?ctrl=forum&action=users");
+        }else{
+            $this->addFlash("error", "Erreur BDD !!!");
+            $this->redirect("?ctrl=forum&action=index");
+        }
+    }
+
+    public function banUser($id){
+
+        $manager = new UserManager;
+        if(Session::get("user")->getRole() !== "SUPER_ADMIN"){
+
+            if($manager->banUser($id)){
+                $this->addFlash("success", "Cet utilisateur a été banni !!!");
+                $this->redirect("?ctrl=forum&action=users");
+            }else{
+                $this->addFlash("error", "Erreur BDD !!!");
+                $this->redirect("?ctrl=forum&action=index");
+            }
+        }else{
+            $this->addFlash("error", "Vous ne pouvez pas bannir SUPER_ADMIN");
+            $this->redirect("?ctrl=forum&action=users");
+        } 
+
+    }
+
+    public function banAdmin($id){
+
+        $manager = new UserManager;
+        if(!Session::get("user")->getRole() == "SUPER_ADMIN"){
+            if($manager->banAdmin($id)){
+                $this->addFlash("success", "Cet Admin devient un membre !!!");
+                $this->redirect("?ctrl=forum&action=users");
+            }else{
+                $this->addFlash("error", "Erreur BDD !!!");
+                $this->redirect("?ctrl=forum&action=index");
+            }
+        }else{
+            $this->addFlash("error", "Vous ne pouvez pas bannir SUPER_ADMIN");
+            $this->redirect("?ctrl=forum&action=users");
+        } 
+
+    }
+
+
 
 
 }
