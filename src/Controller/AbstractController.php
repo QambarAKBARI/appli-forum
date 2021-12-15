@@ -37,9 +37,8 @@ abstract class AbstractController
         return Session::get("user");
     }
 
-    protected function isGranted($role)
+    protected function isGranted($role): bool
     {
-        $role = $role == "ROLE_USER" ? null : $role;
         return (Session::get("user") && Session::get("user")->getRole() === $role);
     }
     

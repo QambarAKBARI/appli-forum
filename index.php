@@ -4,7 +4,11 @@ require "config.php";//CONSTANTES DE l'APPLICATION
 
 session_start();
 
-use App\Service\Router;//FQCN - Fully Qualified Class Name
+use App\Service\Router;
+
+$token = Router::generateToken();
+
+Router::CSRFProtection($token);
 
 $response = Router::handleRequest();
 if($response !== false):
@@ -20,3 +24,4 @@ $content = ob_get_contents();
 ob_end_clean();
 
 require(VIEW_PATH."layout.php");
+

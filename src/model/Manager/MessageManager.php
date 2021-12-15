@@ -53,4 +53,13 @@ class MessageManager extends AbstractManager {
             ]
         );
     }
+
+    public function deleteMessage($id){
+        return $this::executeQuery(
+            "DELETE FROM message WHERE id = :id",
+            [
+                ':id' => $id 
+            ]
+        );
+    }
 }

@@ -43,7 +43,7 @@ class SujetManager extends AbstractManager {
 
     public function insertTheTopic($sujet, $user_id, $categorie_id ){
 
-        return $this->executeQuery(
+         $this->executeQuery(
             "INSERT INTO sujet (titre, user_id, categorie_id) VALUES (:t, :u, :s)",
             [
                 ":t" => $sujet,
@@ -51,6 +51,7 @@ class SujetManager extends AbstractManager {
                 ":s" => $categorie_id
             ]
         );
+        return $this::getLastInsertId();
     }
 
     public function updateTopic($id){
@@ -75,6 +76,15 @@ class SujetManager extends AbstractManager {
             [
                 ":id" => $id,
                 ":y" => "non",
+            ]
+        );
+    }
+
+    public function deleteTopic($id){
+        return $this::executeQuery(
+            "DELETE FROM sujet WHERE id = :id",
+            [
+                ':id' => $id 
             ]
         );
     }

@@ -37,11 +37,16 @@ class SujetController extends AbstractController {
             
             if(Form::isSubmitted()){
                 $sujet = Form::getData("sujet", "text");
+                $message = Form::getData("message", "text");
                 if($sujet){
                     $manager = new SujetManager;
-                    if($manager->insertTheTopic($sujet, $userId, $id)){
-                        $this->addFlash("success", "Votre sujet a bien été ajouté !!");
-                        $this->redirect("?ctrl=sujet&action=sujet&id=$id");
+                    if($topicId = $manager->insertTheTopic($sujet, $userId, $id)){
+                        $mmanager = new MessageManager();
+                        if($mmanager->insertTheMassage($message, $userId, $topicId)){
+                            $this->addFlash("success", "Votre sujet a bien été ajouté !!");
+                            $this->redirect("?ctrl=message&action=message&id=$topicId");
+                        }
+
                     }else $this->addFlash("error", "Problème de connexion de BDD !!!"); 
                 }else $this->addFlash("notice", "Veuillez écrire votre sujet !!");
 
@@ -73,6 +78,17 @@ class SujetController extends AbstractController {
 
             if($manager->updateTopicToNo($id)){
                 $this->addFlash("success", "Votre sujet est bien ouvert maintenant !!!");
+                $this->redirect("?ctrl=forum&action=index");
+            }else{
+                $this->addFlash("error", "Erreur BDD !!!");
+                $this->redirect("?ctrl=forum&action=index");
+            }
+        }
+
+        public function deleteSujet($id){
+            $smanager = new SujetManager();
+            if($smanager->deleteTopic($id)){
+                $this->addFlash("success", "Votre sujet est bien supprimé maintenant !!!");
                 $this->redirect("?ctrl=forum&action=index");
             }else{
                 $this->addFlash("error", "Erreur BDD !!!");

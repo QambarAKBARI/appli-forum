@@ -1,4 +1,6 @@
 <?php 
+
+define("SECRET_WORD", "mounir");
 define("DB_HOST", "localhost:3306");
 define("DB_NAME", "forum");
 define("DB_USER", "root");

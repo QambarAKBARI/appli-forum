@@ -25,6 +25,7 @@
         </label>
     </p>
     <p>
+        <input type="hidden" name="csrf_token" value="<?= $token ?>">
         <input type="submit" value="Inscription">
     </p>
 </form>

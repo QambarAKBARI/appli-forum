@@ -22,4 +22,10 @@ abstract class Session
         return null;
     }
 
+    public static function invalidate()
+    {
+        session_destroy();
+        session_start();
+    }
+
 }
